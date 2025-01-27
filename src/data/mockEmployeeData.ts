@@ -1,14 +1,20 @@
-import {EmployeeProfile} from "@/types/employeeProfile.ts";
+import { EmployeeProfile } from "@/types/employeeProfile.ts";
+
+const generateAvatarUrl = (firstName: string, lastName: string) => {
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      `${firstName} ${lastName}`
+  )}&background=random&size=256&font-size=0.35&length=2&bold=true&color=ffffff`;
+};
 
 export const mockEmployeeData: EmployeeProfile[] = [
   {
-    id: "emp002",
+    id: "emp001",
     personalInfo: {
       firstName: "Sarah",
       lastName: "Chen",
       email: "sarah.chen@company.com",
       phone: "+1 (555) 234-5678",
-      avatar: "/avatars/sarah-chen.jpg",
+      avatar: generateAvatarUrl("Sarah", "Chen"),
       dateOfBirth: "1990-07-22",
       address: {
         street: "456 Innovation Drive",
@@ -25,7 +31,7 @@ export const mockEmployeeData: EmployeeProfile[] = [
       }
     },
     employmentDetails: {
-      id: "emp002",
+      id: "emp001",
       title: "Data Science Lead",
       department: "Analytics",
       startDate: "2019-03-01",
@@ -56,17 +62,20 @@ export const mockEmployeeData: EmployeeProfile[] = [
             experience: "6 years",
             description: "Advanced ML model development and deployment",
             proficiencyLevel: "expert",
-            certifications: [
-              {
-                name: "Advanced Machine Learning",
-                issuer: "Stanford Online",
-                date: "2023-08-15",
-                expiryDate: "2025-08-15",
-                verificationLink: "cert/ml-adv-456"
-              }
-            ],
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
+          }
+        },
+        {
+          name: "Python",
+          level: 4.6,
+          category: "technical",
+          details: {
+            experience: "8 years",
+            description: "Advanced Python development and ML frameworks",
+            proficiencyLevel: "expert",
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -78,16 +87,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
           details: {
             description: "Strong team leadership and mentoring abilities",
             proficiencyLevel: "advanced",
-            projects: [
-              {
-                name: "ML Team Expansion",
-                role: "Team Lead",
-                duration: "9 months",
-                impact: "Built and mentored a team of 6 data scientists"
-              }
-            ],
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -100,8 +101,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
             experience: "4 years",
             description: "Project strategy and resource planning",
             proficiencyLevel: "expert",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -113,8 +114,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
           details: {
             description: "Driving technical innovation and research",
             proficiencyLevel: "expert",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ]
@@ -153,7 +154,7 @@ export const mockEmployeeData: EmployeeProfile[] = [
         targetRole: "Director of AI",
         timeline: "2026",
         requiredSkills: []
-      },
+      }
     },
     metadata: {
       lastUpdated: "2025-01-26",
@@ -162,13 +163,13 @@ export const mockEmployeeData: EmployeeProfile[] = [
     }
   },
   {
-    id: "emp003",
+    id: "emp002",
     personalInfo: {
       firstName: "Marcus",
       lastName: "Rodriguez",
       email: "marcus.rodriguez@company.com",
       phone: "+1 (555) 345-6789",
-      avatar: "/avatars/marcus-rodriguez.jpg",
+      avatar: generateAvatarUrl("Marcus", "Rodriguez"),
       dateOfBirth: "1992-11-03",
       address: {
         street: "789 Product Lane",
@@ -185,7 +186,7 @@ export const mockEmployeeData: EmployeeProfile[] = [
       }
     },
     employmentDetails: {
-      id: "emp003",
+      id: "emp002",
       title: "Product Design Manager",
       department: "Design",
       startDate: "2021-06-15",
@@ -216,8 +217,20 @@ export const mockEmployeeData: EmployeeProfile[] = [
             experience: "7 years",
             description: "Advanced product design and user research",
             proficiencyLevel: "expert",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
+          }
+        },
+        {
+          name: "Figma",
+          level: 4.7,
+          category: "technical",
+          details: {
+            experience: "5 years",
+            description: "Advanced design system and prototyping",
+            proficiencyLevel: "expert",
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -229,8 +242,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
           details: {
             description: "Exceptional creative problem-solving abilities",
             proficiencyLevel: "expert",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -243,8 +256,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
             experience: "3 years",
             description: "Design team leadership and vision setting",
             proficiencyLevel: "advanced",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ],
@@ -256,8 +269,8 @@ export const mockEmployeeData: EmployeeProfile[] = [
           details: {
             description: "Strong user-centered design approach",
             proficiencyLevel: "expert",
-            lastAssessed: "",
-            nextReview: ""
+            lastAssessed: "2024-01-15",
+            nextReview: "2024-07-15"
           }
         }
       ]

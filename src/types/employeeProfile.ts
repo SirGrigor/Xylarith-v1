@@ -76,7 +76,7 @@ export interface SkillCategory {
 export interface Skill {
     name: string;
     level: number;
-    category: keyof SkillCategory;
+    category: string;
     details: SkillDetail;
 }
 

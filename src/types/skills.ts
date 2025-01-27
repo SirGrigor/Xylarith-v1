@@ -1,11 +1,8 @@
 export interface Skill {
   name: string;
   level: number;
-  details?: {
-    experience?: string;
-    description?: string;
-    proficiencyLevel?: string;
-  };
+  category: string;
+  details: SkillDetail;
 }
 
 export interface SkillSet {
@@ -13,6 +10,14 @@ export interface SkillSet {
   soft: Skill[];
   leadership: Skill[];
   core: Skill[];
+}
+
+export interface SkillDetail {
+  experience?: string;
+  description?: string;
+  proficiencyLevel?: string;
+  lastAssessed: string;
+  nextReview: string;
 }
 
 export type SkillCategory = keyof SkillSet;
