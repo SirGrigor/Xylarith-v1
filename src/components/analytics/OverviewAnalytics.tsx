@@ -1,57 +1,16 @@
-import { FC, useState } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import React from 'react';
 import {
-    FileText,
-    MessageCircle,
-    PieChart,
-    Users,
     TrendingUp,
+    Users,
     Clock,
+    BarChart2,
     Target,
     Briefcase,
-    Code,
-    BarChart2, Brain
+    Code
 } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart as ReChartsPie, Pie, Cell } from 'recharts';
-import { generateMockCandidates } from '@/data/candidateMock.ts';
-import { AIScoring } from "@/components/analytics/AIScoring.tsx";
-import { CandidateSearch } from "@/components/analytics/CandidateSearch.tsx";
-import { Candidate } from "@/types/candidate";
-import CVAnalysis from "@/components/analytics/CVAnalysis.tsx";
-import FeedbackAnalytics from "@/components/analytics/FeedbackAnalytics.tsx";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
-const mockCandidates = generateMockCandidates(20);
-
-// Analytics Dashboard Card Component
-const AnalyticsCard: FC<{
-    title: string;
-    value: string | number;
-    icon?: React.ReactNode;
-    trend?: string;
-}> = ({title, value, icon, trend}) => (
-    <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
-        <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center space-x-2">
-                {icon}
-                <span className="text-sm text-gray-400">{title}</span>
-            </div>
-            <div className="text-right">
-                <div className="text-2xl font-bold text-gray-100">{value}</div>
-                {trend && (
-                    <div className="flex items-center text-sm">
-                        <TrendingUp size={14} className="text-green-400 mr-1" />
-                        <span className="text-green-400">{trend}</span>
-                    </div>
-                )}
-            </div>
-        </div>
-    </div>
-);
-
-export const Analytics: FC = () => {
-    const location = useLocation();
-    const [selectedCandidate, setSelectedCandidate] = useState<Candidate>(mockCandidates[0]);
-
+const OverviewAnalytics = () => {
     // Mock data for visualizations
     const hiringTrendData = [
         { month: 'Jan', candidates: 45, interviews: 28, offers: 12 },
@@ -69,62 +28,53 @@ export const Analytics: FC = () => {
         { name: 'Data Science', value: 20 },
     ];
 
-    const navLinks = [
-        {
-            path: "/app/analytics",
-            label: "Overview",
-            icon: <Brain size={20} className="text-blue-400" />,
-        },
-        {
-            path: "/app/analytics/candidates",
-            label: "Candidates",
-            icon: <Users size={20}/>,
-        },
-        {
-            path: "/app/analytics/cv-analysis",
-            label: "CV Analysis",
-            icon: <FileText size={20}/>,
-        },
-        {
-            path: "/app/analytics/scoring",
-            label: "AI Scoring",
-            icon: <PieChart size={20}/>,
-        },
-        {
-            path: "/app/analytics/feedback",
-            label: "Feedback",
-            icon: <MessageCircle size={20}/>,
-        }
-    ];
+    const renderMetricsCard = (title: string, value: string | number, icon: React.ReactNode, trend?: string) => (
+        <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+            <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                    {icon}
+                    <span className="text-sm text-gray-400">{title}</span>
+                </div>
+                <div className="text-right">
+                    <div className="text-2xl font-bold text-gray-100">{value}</div>
+                    {trend && (
+                        <div className="flex items-center text-sm">
+                            <TrendingUp size={14} className="text-green-400 mr-1" />
+                            <span className="text-green-400">{trend}</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
 
-    // Enhanced Overview Analytics Component
-    const OverviewAnalytics = () => (
+    return (
         <div className="space-y-6">
             {/* Top Metrics Section */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <AnalyticsCard
-                    title="Total Candidates"
-                    value={mockCandidates.length}
-                    icon={<Users className="text-blue-400" size={20} />}
-                    trend="+12% this month"
-                />
-                <AnalyticsCard
-                    title="Average Time to Hire"
-                    value="18 days"
-                    icon={<Clock className="text-purple-400" size={20} />}
-                    trend="-3 days"
-                />
-                <AnalyticsCard
-                    title="Success Rate"
-                    value={`${Math.round(mockCandidates.reduce((acc, curr) => acc + curr.aiScore.overallScore, 0) / mockCandidates.length)}%`}
-                    icon={<Target className="text-green-400" size={20} />}
-                    trend="+5% this month"
-                />
-                <AnalyticsCard
-                    title="Active Interviews"
-                    value={mockCandidates.filter(c => c.status === 'interview').length}
-                    icon={<Briefcase className="text-yellow-400" size={20} />}
-                />
+                {renderMetricsCard(
+                    'Total Candidates',
+                    '363',
+                    <Users className="text-blue-400" size={20} />,
+                    '+12% this month'
+                )}
+                {renderMetricsCard(
+                    'Average Time to Hire',
+                    '18 days',
+                    <Clock className="text-purple-400" size={20} />,
+                    '-3 days'
+                )}
+                {renderMetricsCard(
+                    'Interview Success Rate',
+                    '72%',
+                    <Target className="text-green-400" size={20} />,
+                    '+5% this month'
+                )}
+                {renderMetricsCard(
+                    'Open Positions',
+                    '24',
+                    <Briefcase className="text-yellow-400" size={20} />
+                )}
             </div>
 
             {/* Hiring Funnel Metrics */}
@@ -165,7 +115,7 @@ export const Analytics: FC = () => {
                     </div>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
-                            <ReChartsPie>
+                            <PieChart>
                                 <Pie
                                     data={skillDistributionData}
                                     cx="50%"
@@ -187,7 +137,7 @@ export const Analytics: FC = () => {
                                         borderRadius: '0.5rem'
                                     }}
                                 />
-                            </ReChartsPie>
+                            </PieChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
@@ -271,67 +221,6 @@ export const Analytics: FC = () => {
             </div>
         </div>
     );
-
-    return (
-        <div className="space-y-6">
-            {/* Navigation */}
-            <div className="flex space-x-4 mb-6 overflow-x-auto pb-2">
-                {navLinks.map((link) => (
-                    <Link
-                        key={link.path}
-                        to={link.path}
-                        className={`px-4 py-2 rounded-lg flex items-center space-x-2 whitespace-nowrap transition-colors ${
-                            location.pathname === link.path
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
-                        }`}
-                    >
-                        {link.icon}
-                        <span>{link.label}</span>
-                    </Link>
-                ))}
-            </div>
-
-            {/* Selected Candidate Info */}
-            {(location.pathname === '/app/analytics/cv-analysis' ||
-                location.pathname === '/app/analytics/scoring') && selectedCandidate && (
-                <div className="p-4 bg-gray-800 rounded-lg border border-gray-700">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h2 className="text-lg font-semibold text-white">
-                                {selectedCandidate.firstName} {selectedCandidate.lastName}
-                            </h2>
-                            <p className="text-gray-400">{selectedCandidate.desiredPosition}</p>
-                        </div>
-                        <Link
-                            to="/app/analytics/candidates"
-                            className="text-blue-400 hover:text-blue-300"
-                        >
-                            ← Back to Candidates
-                        </Link>
-                    </div>
-                </div>
-            )}
-
-            <Routes>
-                <Route path="/" element={<OverviewAnalytics/>}/>
-                <Route
-                    path="/candidates"
-                    element={<CandidateSearch onSelectCandidate={setSelectedCandidate}/>}
-                />
-                <Route
-                    path="/cv-analysis"
-                    element={<CVAnalysis/>}
-                />
-                <Route
-                    path="/scoring"
-                    element={<AIScoring candidate={selectedCandidate}/>}
-                />
-                <Route
-                    path="/feedback"
-                    element={<FeedbackAnalytics/>}
-                />
-            </Routes>
-        </div>
-    );
 };
+
+export default OverviewAnalytics;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route, useLocation, Link, useNavigate } from 'react-router-dom';
 import { Users, FileText, PieChart } from 'lucide-react';
-import { CVAnalysis } from "@/components/analytics/CVAnalysis";
 import { AIScoring } from "@/components/analytics/AIScoring";
 import { CandidateSearch } from "@/components/analytics/CandidateSearch";
 import { generateMockCandidates } from '@/data/candidateMock.ts'
 import { Candidate } from '@/types/candidate';
+import CVAnalysis from "@/components/analytics/CVAnalysis.tsx";
 
 // Generate mock data once at module level
 const mockCandidates = generateMockCandidates(20);
@@ -103,7 +103,7 @@ export const CandidateEngine: React.FC = () => {
                         />
                         <Route
                             path="/cv-analysis"
-                            element={<CVAnalysis candidate={selectedCandidate} />}
+                            element={<CVAnalysis />}
                         />
                         <Route
                             path="/scoring"

@@ -7,6 +7,7 @@ import {
   AcademicCapIcon
 } from '@heroicons/react/24/outline';
 import { ComponentType } from 'react';
+import {Brain} from "lucide-react";
 
 export interface NavigationItem {
   id: string;
@@ -58,6 +59,6 @@ export const mainNavigation: NavigationItem[] = [
     id: 'analytics',
     label: 'Analytics',
     path: '/app/analytics',
-    icon: ChartBarIcon
+    icon: Brain
   }
 ];
