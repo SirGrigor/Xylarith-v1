@@ -1,22 +1,45 @@
 import { FC } from 'react';
-import { PredictionCard } from '../components/analytics/PredictionCard';
-import { ResourceForecastChart } from '../components/analytics/ResourceForecastChart';
-import { TeamCalendar } from '../components/calendar/TeamCalendar';
-import { mockPredictions, mockResourceForecast, mockTeamEvents } from '../data/mockData';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 
 export const Analytics: FC = () => {
-  return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {mockPredictions.map(prediction => (
-          <PredictionCard key={prediction.id} prediction={prediction} />
-        ))}
-      </div>
+    const location = useLocation();
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <ResourceForecastChart data={mockResourceForecast} />
-        <TeamCalendar events={mockTeamEvents} />
-      </div>
-    </div>
-  );
+    return (
+        <div className="space-y-6">
+            <div className="flex space-x-4 mb-6">
+                <Link
+                    to="/app/analytics"
+                    className={`px-4 py-2 rounded-lg ${
+                        location.pathname === '/app/analytics'
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-100 text-gray-700'
+                    }`}
+                >
+                    Overview
+                </Link>
+                <Link
+                    to="/app/analytics/feedback"
+                    className={`px-4 py-2 rounded-lg ${
+                        location.pathname === '/app/analytics/feedback'
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-100 text-gray-700'
+                    }`}
+                >
+                    Feedback Analytics
+                </Link>
+                <Link
+                    to="/app/analytics/performance"
+                    className={`px-4 py-2 rounded-lg ${
+                        location.pathname === '/app/analytics/performance'
+                            ? 'bg-blue-500 text-white'
+                            : 'bg-gray-100 text-gray-700'
+                    }`}
+                >
+                    Performance Analytics
+                </Link>
+            </div>
+
+            <Outlet />
+        </div>
+    );
 };
